@@ -480,6 +480,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorChangeTime: 1
+  specifyColors: 0
+  colors:
+  - serializedVersion: 2
+    rgba: 4278190080
+  - serializedVersion: 2
+    rgba: 4294967295
+  - serializedVersion: 2
+    rgba: 4278190335
 --- !u!1 &1329567433
 GameObject:
   m_ObjectHideFlags: 0

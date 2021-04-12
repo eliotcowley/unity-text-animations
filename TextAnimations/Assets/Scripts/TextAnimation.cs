@@ -9,12 +9,18 @@ public class TextAnimation : MonoBehaviour
     [SerializeField]
     private float colorChangeTime = 1f;
 
+    [SerializeField]
+    private bool specifyColors = true;
+
+    [SerializeField, ConditionalHide(nameof(specifyColors))]
+    private Color32[] colors;
+
     private TextMeshProUGUI text;
 
     private void Start()
     {
         this.text = GetComponent<TextMeshProUGUI>();
-        ChangeColors();
+        InvokeRepeating(nameof(ChangeColors), 0f, this.colorChangeTime);
     }
 
     private void ChangeColors()
@@ -35,7 +41,16 @@ public class TextAnimation : MonoBehaviour
             // Get the index of the first vertex used by this text element.
             int vertexIndex = textInfo.characterInfo[i].vertexIndex;
 
-            Color32 color = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
+            Color32 color;
+
+            if (this.specifyColors)
+            {
+                color = this.colors[Random.Range(0, this.colors.Length)];
+            }
+            else
+            {
+                color = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
+            }
 
             newVertexColors[vertexIndex + 0] = color;
             newVertexColors[vertexIndex + 1] = color;
